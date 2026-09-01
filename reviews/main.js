@@ -42,4 +42,50 @@ const nextBtn = document.querySelector('.next-btn');
 const randomBtn = document.querySelector('.random-btn');
 
 // set starting item 
-let currentItem = 0;
+let currentItem = 0; // should be the same length of reviews array
+
+// LOAD initial item
+window.addEventListener('DOMContentLoaded', function () {
+
+  showPerson(currentItem)
+
+});
+
+// show person based on item
+function showPerson() {
+  const item = reviews[currentItem];
+  
+  img.src = item.img
+  author.textContent = item.name;
+  job.textContent = item.job;
+  info.textContent = item.text;
+}
+
+// show next person 
+nextBtn.addEventListener('click', function () {
+  currentItem++;
+
+  if (currentItem > reviews.length - 1) {
+    currentItem = 0;
+  }
+
+  showPerson()
+})
+
+// show previous person 
+prevBtn.addEventListener('click', function () {
+  currentItem--;
+
+  if (currentItem < 0) {
+    currentItem = reviews.length - 1;
+  }
+
+  showPerson()
+})
+
+// show random person 
+randomBtn.addEventListener('click', function () {
+  currentItem = Math.floor(Math.random() * reviews.length);
+
+  showPerson();
+})
